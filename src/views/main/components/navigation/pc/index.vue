@@ -1,0 +1,7 @@
+<template>
+  <div>pc端navigation</div>
+</template>
+<script lang='ts' setup>
+</script>
+<style  lang='scss' scoped>
+</style>
