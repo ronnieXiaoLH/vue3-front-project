@@ -42,6 +42,8 @@
         placeholder="搜索"
         v-model="inputValue"
         @focus="handleFocus"
+        @blur="handleBlur"
+        @input="handleInput"
         @keyup.enter="handleSearch"
       />
       <!-- 删除按钮 -->
@@ -127,6 +129,10 @@
 <script lang="ts">
 const EMIT_UPDATE_MODELVALUE = 'update:modelValue'
 const EMIT_SEARCH = 'search'
+const EMIT_CLEAR = 'clear'
+const EMIT_INPUT = 'input'
+const EMIT_FOCUS = 'focus'
+const EMIT_BLUR = 'blur'
 </script>
 <script lang='ts' setup>
 import { ref } from 'vue'
@@ -141,10 +147,19 @@ const props = defineProps({
 
 const inputValue = useVModel(props)
 
-const emits = defineEmits([EMIT_UPDATE_MODELVALUE, EMIT_SEARCH])
+// 触发对应的事件，使用该组件的地方就可以做对应想做的事情
+const emits = defineEmits([
+  EMIT_UPDATE_MODELVALUE,
+  EMIT_SEARCH,
+  EMIT_CLEAR,
+  EMIT_INPUT,
+  EMIT_FOCUS,
+  EMIT_BLUR,
+])
 
 const handleClear = () => {
   inputValue.value = ''
+  emits(EMIT_CLEAR, '')
 }
 
 const handleSearch = () => {
@@ -155,6 +170,15 @@ const handleSearch = () => {
 const isFocus = ref<boolean>(false)
 const handleFocus = () => {
   isFocus.value = true
+  emits(EMIT_FOCUS)
+}
+
+const handleBlur = () => {
+  emits(EMIT_BLUR)
+}
+
+const handleInput = () => {
+  emits(EMIT_INPUT)
 }
 
 // 点击区域外，隐藏 dropdown
