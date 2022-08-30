@@ -4,7 +4,7 @@
     <ul class="overflow-y-auto">
       <li
         class="text-lg text-zinc-900 px-1 py-1.5 duration-200"
-        v-for="(item, index) in categorys"
+        v-for="(item, index) in $store.getters['category/categorys']"
         :key="item.id"
         @click="clickItem(index)"
       >
@@ -14,14 +14,7 @@
   </div>
 </template>
 <script lang='ts' setup>
-import { PropType } from '@vue/runtime-core'
-import { CategoryItem } from '../navigation/types'
-
 const props = defineProps({
-  categorys: {
-    type: Array as PropType<CategoryItem[]>,
-    required: true,
-  },
   currentCategoryIndex: {
     type: Number,
     required: true,

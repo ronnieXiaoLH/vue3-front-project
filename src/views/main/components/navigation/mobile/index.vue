@@ -57,23 +57,22 @@
   </div>
   <m-popup v-model="isVisible">
     <menu-vue
-      :categorys="data"
       :currentCategoryIndex="currentCategoryIndex"
       @onClickItem="changeCategoryIndex"
     ></menu-vue>
   </m-popup>
 </template>
 <script lang='ts' setup>
-import { onBeforeUpdate, PropType, ref, watch } from 'vue'
+import { computed, onBeforeUpdate, PropType, ref, watch } from 'vue'
 import { useScroll } from '@vueuse/core'
 import { CategoryItem } from '../types'
 import MenuVue from '../../menu/index.vue'
+import { useStore } from 'vuex'
+import { GlobalDataProps } from '@/store'
 
-const props = defineProps({
-  data: {
-    type: Array as PropType<CategoryItem[]>,
-  },
-})
+const store = useStore<GlobalDataProps>()
+
+const data = computed<CategoryItem[]>(() => store.getters['category/categorys'])
 
 const sliderTarget = ref()
 
