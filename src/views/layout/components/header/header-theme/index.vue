@@ -11,9 +11,10 @@
           duration-200
           outline-none
           hover:bg-zinc-100/60
+          dark:hover:bg-zinc-900
         "
-        fillClass="fill-zinc-900"
-        name="theme-light"
+        fillClass="fill-zinc-900 dark:fill-zinc-300"
+        :name="svgIconName"
       ></m-svg-icon>
     </template>
     <div class="w-[140px] overflow-hidden">
@@ -25,22 +26,29 @@
           cursor-pointer
           rounded
           hover:bg-zinc-100/60
+          dark:hover:bg-zinc-800
         "
         v-for="item in themeList"
         :key="item.id"
+        @click="clickItem(item.type)"
       >
         <m-svg-icon
           class="w-1.5 h-1.5 mr-1"
-          fillClass="fill-zinc-900"
+          fillClass="fill-zinc-900 dark:fill-zinc-300"
           :name="item.icon"
         ></m-svg-icon>
-        <span class="text-zinc-900 text-sm">{{ item.text }}</span>
+        <span class="text-zinc-900 dark:text-zinc-300 text-sm">{{
+          item.text
+        }}</span>
       </div>
     </div>
   </m-popover>
 </template>
 <script lang='ts' setup>
-import { THEME_DARK, THEME_LIGHT, THEME_SYSTEM } from '@/constants'
+import { computed } from '@vue/runtime-core'
+import { useStore } from 'vuex'
+import { GlobalDataProps } from '@/store'
+import useTheme from '@/utils/theme'
 
 interface ThemeItem {
   id: number
@@ -48,26 +56,40 @@ interface ThemeItem {
   type: string
   text: string
 }
+
 const themeList: ThemeItem[] = [
   {
     id: 0,
     icon: 'theme-light',
-    type: THEME_LIGHT,
+    type: 'light',
     text: '极夜白',
   },
   {
     id: 1,
     icon: 'theme-dark',
-    type: THEME_DARK,
-    text: '极夜白',
+    type: 'dark',
+    text: '极夜黑',
   },
   {
     id: 2,
     icon: 'theme-system',
-    type: THEME_SYSTEM,
+    type: 'system',
     text: '跟随系统',
   },
 ]
+
+const store = useStore<GlobalDataProps>()
+
+const clickItem = (themeType: string) => {
+  store.commit('theme/changeThemeType', themeType)
+  useTheme()
+}
+
+const svgIconName = computed(
+  () =>
+    themeList.find((item) => item.type === store.getters['theme/themeType'])
+      ?.icon
+)
 </script>
 <style  lang='scss' scoped>
 </style>

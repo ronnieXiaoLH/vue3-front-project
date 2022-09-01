@@ -11,7 +11,7 @@
     <!-- 内容 -->
     <transition name="popup-dowm-up">
       <div
-        class="w-screen bg-white z-50 fixed bottom-0"
+        class="w-screen bg-white dark:bg-zinc-800 z-50 fixed bottom-0"
         v-if="isVisible"
         v-bind="$attrs"
       >

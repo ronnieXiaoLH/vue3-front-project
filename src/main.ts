@@ -5,9 +5,11 @@ import store from './store'
 import MLibs from './libs'
 import './styles/index.scss'
 import { useREM } from './utils/flexible'
+import useTheme from './utils/theme'
 // 注册 svg-icons
 import 'virtual:svg-icons-register'
 
 useREM()
+useTheme()
 
 createApp(App).use(router).use(store).use(MLibs).mount('#app')

@@ -38,13 +38,14 @@
           cursor-pointer
           duration-200
           hover:bg-zinc-200
+          dark:hover:bg-zinc-900
         "
         @click="toggle"
       >
         <m-svg-icon
           class="w-1 h-1"
           :name="isOpenCategory ? 'fold' : 'unfold'"
-          fillClass="fill-zinc-900"
+          fillClass="fill-zinc-900 dark:fill-zinc-300"
         ></m-svg-icon>
       </div>
       <li
@@ -69,7 +70,8 @@
           mb-1
         "
         :class="{
-          'text-zinc-900 bg-zinc-200': currentCategoryIndex === index,
+          'text-zinc-900 dark:text-zinc-300 bg-zinc-200 dark:bg-zinc-900':
+            currentCategoryIndex === index,
         }"
         v-for="(item, index) in $store.getters['category/categorys']"
         :key="item.id"

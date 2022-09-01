@@ -7,6 +7,7 @@
       p-0.5
       rounded-xl
       border-white
+      dark:border-zinc-200
       duration-500
       hover:bg-red-100/40
     "
@@ -27,15 +28,21 @@
           pl-4
           outline-0
           bg-zinc-100
+          dark:bg-zinc-800
           caret-zinc-400
           rounded-xl
           text-zinc-900
+          dark:text-zinc-200
           tracking-wide
           text-sm
           font-semibold
           border border-zinc-100
+          dark:border-zinc-700
           focus:border-red-300
-          group-hover:bg-white group-hover:border-zinc-200
+          group-hover:bg-white
+          dark:group-hover:bg-zinc-900
+          group-hover:border-zinc-200
+          dark:group-hover:border-zinc-700
           duration-500
         "
         type="text"

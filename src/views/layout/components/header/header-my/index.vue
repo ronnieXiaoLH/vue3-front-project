@@ -12,6 +12,7 @@
           duration-200
           outline-none
           hover:bg-zinc-100
+          dark:hover:bg-zinc-900
         "
       >
         <img
@@ -21,7 +22,7 @@
         <m-svg-icon
           class="h-1.5 w-1.5 ml-0.5"
           name="down-arrow"
-          fillClass="fill-zinc-900"
+          fillClass="fill-zinc-900 dark:fill-zinc-300"
         ></m-svg-icon>
         <m-svg-icon
           class="h-1.5 w-1.5 absolute bottom-0 right-[16px]"
@@ -31,16 +32,26 @@
     </template>
     <div class="w-[140px] overflow-hidden">
       <div
-        class="flex items-center p-1 cursor-pointer rounded hover:bg-zinc-200"
+        class="
+          flex
+          items-center
+          p-1
+          cursor-pointer
+          rounded
+          hover:bg-zinc-200
+          dark:hover:bg-zinc-800
+        "
         v-for="item in menuList"
         :key="item.id"
       >
         <m-svg-icon
           class="w-1.5 h-1.5 mr-1"
           :name="item.icon"
-          fillClass="fill-zinc-900"
+          fillClass="fill-zinc-900 dark:fill-zinc-300"
         ></m-svg-icon>
-        <span class="text-zinc-800 text-sm">{{ item.title }}</span>
+        <span class="text-zinc-800 dark:text-zinc-300 text-sm">{{
+          item.title
+        }}</span>
       </div>
     </div>
   </m-popover>
