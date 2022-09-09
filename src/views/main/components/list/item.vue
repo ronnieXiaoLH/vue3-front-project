@@ -1,7 +1,17 @@
 <template>
   <div class="bg-white dark:bg-zinc-900 xl:dark:bg-zinc-800 rounded pb-1">
-    <div class="relative w-full rounded cursor-zoom-in group">
-      <img class="w-full rounded bg-transparent" :src="data.photo" />
+    <div
+      class="relative w-full rounded cursor-zoom-in group"
+      :style="{ backgroundColor: randomRGB() }"
+    >
+      <img
+        v-lazy
+        class="w-full rounded bg-transparent"
+        :style="{
+          height: (width / data.photoWidth) * data.photoHeight + 'px',
+        }"
+        :src="data.photo"
+      />
       <!-- 遮罩层 -->
       <div
         class="
@@ -52,7 +62,7 @@
     </p>
     <!-- 作者 -->
     <div class="flex items-center mt-1 px-1">
-      <img class="h-2 w-2 rounded-full" :src="data.avatar" />
+      <img v-lazy class="h-2 w-2 rounded-full" :src="data.avatar" />
       <span class="text-sm text-zinc-500 ml-1">{{ data.author }}</span>
     </div>
   </div>
@@ -60,10 +70,14 @@
 <script lang='ts' setup>
 import { PropType } from '@vue/runtime-core'
 import { PexelsItem } from '../../../../helper'
+import { randomRGB } from '../../../../utils/color'
 const props = defineProps({
   data: {
     type: Object as PropType<PexelsItem>,
     required: true,
+  },
+  width: {
+    type: Number,
   },
 })
 </script>

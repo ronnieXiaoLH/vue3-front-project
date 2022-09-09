@@ -161,7 +161,7 @@ const useItemLocation = () => {
     increasingHeight(index)
   })
   // 指定容器的高度
-  containerTarget.value = getMaxHeigt(columnHeightObj.value)
+  containerHeight.value = getMaxHeigt(columnHeightObj.value)
 }
 
 const getItemLeft = () => {
