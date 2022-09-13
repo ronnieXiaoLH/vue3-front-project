@@ -14,9 +14,9 @@
           active:bg-zinc-100
           dark:active:bg-zinc-900
         "
-        v-for="(item, index) in $store.getters['category/categorys']"
+        v-for="item in $store.getters['category/categorys']"
         :key="item.id"
-        @click="clickItem(index)"
+        @click="clickItem(item)"
       >
         {{ item.name }}
       </li>
@@ -24,6 +24,8 @@
   </div>
 </template>
 <script lang='ts' setup>
+import { CategoryItem } from '../../../../store/modules/category'
+
 const props = defineProps({
   currentCategoryIndex: {
     type: Number,
@@ -33,8 +35,8 @@ const props = defineProps({
 
 const emits = defineEmits(['onClickItem'])
 
-const clickItem = (index: number) => {
-  emits('onClickItem', index)
+const clickItem = (category: CategoryItem) => {
+  emits('onClickItem', category)
 }
 </script>
 <style  lang='scss' scoped>

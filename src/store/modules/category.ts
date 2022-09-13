@@ -2,12 +2,11 @@ import { Module } from 'vuex'
 import { GlobalDataProps } from '..'
 import { ALL_CATEGORY_ITEM } from '@/constants'
 import { getCategory } from '@/api/category'
-
-interface CategoryItem {
+export interface CategoryItem {
   id: string
-  col: number
+  col?: number
   name: string
-  usrname: string
+  urlname?: string
 }
 
 export interface CategorysProps {

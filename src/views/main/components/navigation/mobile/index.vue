@@ -49,7 +49,7 @@
         :ref="setItemRef"
         v-for="(item, index) in data"
         :key="item.id"
-        @click="clickItem(index)"
+        @click="clickItem(item)"
       >
         {{ item.name }}
       </li>
@@ -58,7 +58,7 @@
   <m-popup v-model="isVisible">
     <menu-vue
       :currentCategoryIndex="currentCategoryIndex"
-      @onClickItem="changeCategoryIndex"
+      @onClickItem="changeCategory"
     ></menu-vue>
   </m-popup>
 </template>
@@ -73,6 +73,10 @@ import { GlobalDataProps } from '@/store'
 const store = useStore<GlobalDataProps>()
 
 const data = computed<CategoryItem[]>(() => store.getters['category/categorys'])
+
+const currentCategoryIndex = computed(
+  () => store.getters['app/currentCategoryIndex']
+)
 
 const sliderTarget = ref()
 
@@ -93,15 +97,15 @@ const sliderStyle = ref({
   transform: 'translateX(0px)',
   width: '52px',
 })
-const currentCategoryIndex = ref<number>(0)
 
-const clickItem = (index: number) => {
-  currentCategoryIndex.value = index
+const clickItem = (category: CategoryItem) => {
+  store.commit('app/changeCurrentCategory', category)
 }
 
 watch(
   () => currentCategoryIndex.value,
   (index) => {
+    if (!itemRefs[index]) return
     const { left, width } = itemRefs[index].getBoundingClientRect()
     sliderStyle.value = {
       transform: `translateX(${ulScrollLeft.value + left - 10}px)`,
@@ -116,8 +120,8 @@ const showPopup = () => {
   isVisible.value = true
 }
 
-const changeCategoryIndex = (index: number) => {
-  currentCategoryIndex.value = index
+const changeCategory = (category: CategoryItem) => {
+  store.commit('app/changeCurrentCategory', category)
   isVisible.value = false
 }
 </script>

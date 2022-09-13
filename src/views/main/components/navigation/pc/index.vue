@@ -75,7 +75,7 @@
         }"
         v-for="(item, index) in $store.getters['category/categorys']"
         :key="item.id"
-        @click="clickItem(index)"
+        @click="clickItem(item)"
       >
         {{ item.name }}
       </li>
@@ -83,17 +83,24 @@
   </div>
 </template>
 <script lang='ts' setup>
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
+import { useStore } from 'vuex'
+import { GlobalDataProps } from '../../../../../store'
+import { CategoryItem } from '../../../../../store/modules/category'
+
+const store = useStore<GlobalDataProps>()
 
 const isOpenCategory = ref<boolean>(false)
-const currentCategoryIndex = ref<number>(0)
+const currentCategoryIndex = computed(
+  () => store.getters['app/currentCategoryIndex']
+)
 
 const toggle = () => {
   isOpenCategory.value = !isOpenCategory.value
 }
 
-const clickItem = (index: number) => {
-  currentCategoryIndex.value = index
+const clickItem = (category: CategoryItem) => {
+  store.commit('app/changeCurrentCategory', category)
 }
 </script>
 <style  lang='scss' scoped>
