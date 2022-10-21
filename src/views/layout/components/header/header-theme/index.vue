@@ -3,6 +3,7 @@
     <template #reference>
       <m-svg-icon
         class="
+          guide-theme
           w-4
           h-4
           p-1

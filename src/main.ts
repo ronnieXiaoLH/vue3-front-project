@@ -7,10 +7,13 @@ import MDirectives from './directives'
 import './styles/index.scss'
 import { useREM } from './utils/flexible'
 import useTheme from './utils/theme'
+import { message } from './libs/message'
 // 注册 svg-icons
 import 'virtual:svg-icons-register'
 
 useREM()
 useTheme()
 
-createApp(App).use(router).use(store).use(MDirectives).use(MLibs).mount('#app')
+const app = createApp(App).use(router).use(store).use(MDirectives).use(MLibs)
+app.config.globalProperties.$message = message
+app.mount('#app')

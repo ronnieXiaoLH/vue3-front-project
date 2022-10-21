@@ -1705,6 +1705,60 @@ function getPexelsList(categoryId) {
     : list
 }
 
+server.get('/pexels/themes', (req, res) => {
+  res.status(200).json({
+    success: true,
+    code: 200,
+    data: {
+      themes: [
+        {
+          id: 'Parenting',
+          photo:
+            'https://images.pexels.com/photos/3663038/pexels-photo-3663038.jpeg?auto=compress&cs=tinysrgb&dpr=1&fit=crop&h=250&w=360',
+          title: '亲子',
+        },
+        {
+          id: 'fashion',
+          photo:
+            'https://images.pexels.com/videos/7305158/pexels-photo-7305158.jpeg?auto=compress&cs=tinysrgb&dpr=1&fit=crop&h=250&w=360',
+          title: '时尚',
+        },
+        {
+          id: 'Botany',
+          photo:
+            'https://images.pexels.com/photos/212940/pexels-photo-212940.jpeg?auto=compress&cs=tinysrgb&dpr=1&fit=crop&h=250&w=360',
+          title: '植物',
+        },
+        {
+          id: 'food photography',
+          photo:
+            'https://images.pexels.com/photos/1652312/pexels-photo-1652312.jpeg?auto=compress&cs=tinysrgb&dpr=1&fit=crop&h=250&w=360',
+          title: '美食摄影',
+        },
+        {
+          id: 'color theme',
+          photo:
+            'https://images.pexels.com/photos/4711052/pexels-photo-4711052.jpeg?auto=compress&cs=tinysrgb&dpr=1&fit=crop&h=250&w=360',
+          title: '颜色',
+        },
+        {
+          id: 'Wallpaper',
+          photo:
+            'https://images.pexels.com/photos/6076811/pexels-photo-6076811.jpeg?auto=compress&cs=tinysrgb&dpr=1&fit=crop&h=250&w=360',
+          title: '壁纸',
+        },
+        {
+          id: 'black theme',
+          photo:
+            'https://images.pexels.com/photos/1356300/pexels-photo-1356300.jpeg?auto=compress&cs=tinysrgb&dpr=1&fit=crop&h=250&w=360',
+          title: '黑色',
+        },
+      ],
+    },
+    message: 'success',
+  })
+})
+
 server.listen(4000, () => {
   console.log('JSON Server is running at 4000')
 })

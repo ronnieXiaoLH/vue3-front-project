@@ -45,6 +45,7 @@
           size="small"
           icon="download"
           iconClass="fill-zinc-900 dark:fill-zinc-200"
+          @click="handleDownload"
         ></m-button>
         <!-- 全屏 -->
         <m-button
@@ -53,6 +54,7 @@
           size="small"
           icon="full"
           iconClass="fill-zinc-900 dark:fill-zinc-200"
+          @click="onFullscreen"
         ></m-button>
       </div>
     </div>
@@ -68,9 +70,11 @@
   </div>
 </template>
 <script lang='ts' setup>
-import { PropType } from '@vue/runtime-core'
+import { PropType, ref } from 'vue'
+import { saveAs } from 'file-saver'
 import { PexelsItem } from '../../../../helper'
 import { randomRGB } from '../../../../utils/color'
+import { useFullscreen } from '@vueuse/core'
 const props = defineProps({
   data: {
     type: Object as PropType<PexelsItem>,
@@ -80,6 +84,13 @@ const props = defineProps({
     type: Number,
   },
 })
+
+const handleDownload = () => {
+  saveAs(props.data.photoDownLink)
+}
+
+const imgTarget = ref(null)
+const { enter: onFullscreen } = useFullscreen(imgTarget.value)
 </script>
 <style  lang='scss' scoped>
 </style>

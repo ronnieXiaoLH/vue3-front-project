@@ -14,6 +14,15 @@ export default defineConfig({
       symbolId: 'icon-[name]',
     }),
   ],
+  server: {
+    proxy: {
+      '/pexels': {
+        target: 'https://www.pexels.com/zh-cn/api/v3/',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/pexels/, ''),
+      },
+    },
+  },
   resolve: {
     alias: {
       '@': '/src',

@@ -6,3 +6,9 @@ export const getPexlesList = (data) => {
     params: data,
   })
 }
+
+export const getPexelsThemes = () => {
+  return request({
+    url: '/pexels/themes',
+  })
+}

@@ -69,6 +69,7 @@ const sizeEnum = {
 const EMITS_CLICK = 'click'
 </script>
 <script lang='ts' setup>
+import MSvgIcon from '../svg-icon/index.vue'
 const props = defineProps({
   // icon 的 name
   icon: String,

@@ -3,6 +3,7 @@
     <template #reference>
       <div
         class="
+          guide-my
           relative
           flex
           items-center

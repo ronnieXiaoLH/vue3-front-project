@@ -11,6 +11,10 @@
   "dependencies": {
     "@vueuse/core": "^9.1.1",
     "axios": "^0.27.2",
+    "driver.js": "^0.9.8",
+    "esbuild-windows-64": "^0.15.11",
+    "file-saver": "^2.0.5",
+    "tailwind-scrollbar": "^2.1.0-preview.0",
     "vue": "^3.2.37",
     "vue-router": "^4.1.4",
     "vuex": "^4.0.2",
