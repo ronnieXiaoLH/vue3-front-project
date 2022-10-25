@@ -13,10 +13,24 @@
         :picturePreReading="false"
       >
         <template v-slot="{ item, width }">
-          <item-vue :data="item" :width="width"></item-vue>
+          <item-vue
+            :data="item"
+            :width="width"
+            @itemClick="showDetail"
+          ></item-vue>
         </template>
       </m-waterfall>
     </m-infinite>
+
+    <!-- 详情内容展示 -->
+    <transition
+      :css="false"
+      @before-enter="beforeEnter"
+      @enter="enter"
+      @leave="leave"
+    >
+      <pins-vue v-if="isShowDetail" :id="currentItem.id"></pins-vue>
+    </transition>
   </div>
 </template>
 <script lang='ts' setup>
@@ -28,6 +42,9 @@ import { isMobileTermial } from '../../../../utils/flexible'
 import { useStore } from 'vuex'
 import { GlobalDataProps } from '../../../../store/index.js'
 import { CategoryItem } from '../../../../store/modules/category.js'
+import pinsVue from '../../../pins/components/pins.vue'
+import gsap from 'gsap'
+import { useEventListener } from '@vueuse/core'
 
 const store = useStore<GlobalDataProps>()
 
@@ -89,6 +106,63 @@ watch(
     })
   }
 )
+
+// 控制详情内容的展示
+const isShowDetail = ref<boolean>(false)
+
+const currentItem = ref({
+  id: '',
+  position: {
+    translateX: 0,
+    translateY: 0,
+  },
+})
+
+const showDetail = (item: any) => {
+  console.log('item...', item)
+  history.pushState(null, '', `/pins/${item.id}`)
+  currentItem.value = item
+  isShowDetail.value = true
+}
+
+const beforeEnter = (el: HTMLElement) => {
+  gsap.set(el, {
+    scaleX: 0,
+    scaleY: 0,
+    opacity: 0,
+    transformOrigin: '0 0',
+    translateX: currentItem.value.position?.translateX,
+    translateY: currentItem.value.position?.translateY,
+  })
+}
+const enter = (el: HTMLElement, done: any) => {
+  gsap.to(el, {
+    duration: 0.3,
+    scaleX: 1,
+    scaleY: 1,
+    opacity: 1,
+    transformOrigin: '0 0',
+    translateX: 0,
+    translateY: 0,
+    onComplete: done,
+  })
+}
+const leave = (el: HTMLElement, done: any) => {
+  gsap.to(el, {
+    scaleX: 0,
+    scaleY: 0,
+    opacity: 0,
+    transformOrigin: '0 0',
+    translateX: currentItem.value.position?.translateX,
+    translateY: currentItem.value.position?.translateY,
+    onComplete: done,
+  })
+}
+
+// 监听浏览器的后退按钮事件
+useEventListener('popstate', () => {
+  isShowDetail.value = false
+})
 </script>
 <style  lang='scss' scoped>
 </style>

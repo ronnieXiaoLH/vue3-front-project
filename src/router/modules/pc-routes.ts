@@ -13,6 +13,11 @@ const routes: RouteItem[] = [
       },
     ],
   },
+  {
+    path: '/pins/:id',
+    name: 'pins',
+    component: () => import('@/views/pins/index.vue'),
+  },
 ]
 
 export default routes

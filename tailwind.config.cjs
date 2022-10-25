@@ -37,6 +37,9 @@ module.exports = {
       variants: {
         scroollbar: ['dark'],
       },
+      backdropBlur: {
+        '4xl': '240px',
+      },
     },
   },
   plugins: [require('tailwind-scrollbar')],

@@ -1,10 +1,14 @@
 <template>
-  <div class="bg-white dark:bg-zinc-900 xl:dark:bg-zinc-800 rounded pb-1">
+  <div
+    class="bg-white dark:bg-zinc-900 xl:dark:bg-zinc-800 rounded pb-1"
+    @click="showDetail"
+  >
     <div
       class="relative w-full rounded cursor-zoom-in group"
       :style="{ backgroundColor: randomRGB() }"
     >
       <img
+        ref="imgTarget"
         v-lazy
         class="w-full rounded bg-transparent"
         :style="{
@@ -70,11 +74,11 @@
   </div>
 </template>
 <script lang='ts' setup>
-import { PropType, ref } from 'vue'
+import { computed, PropType, ref } from 'vue'
 import { saveAs } from 'file-saver'
 import { PexelsItem } from '../../../../helper'
 import { randomRGB } from '../../../../utils/color'
-import { useFullscreen } from '@vueuse/core'
+import { useElementBounding, useFullscreen } from '@vueuse/core'
 const props = defineProps({
   data: {
     type: Object as PropType<PexelsItem>,
@@ -91,6 +95,30 @@ const handleDownload = () => {
 
 const imgTarget = ref(null)
 const { enter: onFullscreen } = useFullscreen(imgTarget.value)
+
+const emits = defineEmits(['itemClick'])
+
+const {
+  x: imgContainerX,
+  y: imgContainerY,
+  width: imgContainerWidth,
+  height: imgContainerHeight,
+} = useElementBounding(imgTarget)
+// 记录图片中心点的位置
+const imgContainerCenter = computed(() => {
+  return {
+    translateX: imgContainerX.value + imgContainerWidth.value / 2,
+    translateY: imgContainerY.value + imgContainerHeight.value / 2,
+  }
+})
+
+// 点击进入详情
+const showDetail = () => {
+  emits('itemClick', {
+    id: props.data.id,
+    position: imgContainerCenter.value,
+  })
+}
 </script>
 <style  lang='scss' scoped>
 </style>
