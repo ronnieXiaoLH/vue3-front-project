@@ -60,6 +60,7 @@ const props = defineProps({
   // 消息展示时长
   duration: {
     type: Number,
+    default: 1000,
   },
   // 关闭时的回调
   destory: {

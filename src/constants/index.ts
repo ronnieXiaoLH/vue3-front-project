@@ -6,3 +6,5 @@ export const ALL_CATEGORY_ITEM = {
   id: 'all',
   name: '全部',
 }
+
+export const LOGIN_TYPE_USERNAME = 'username'

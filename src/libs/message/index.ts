@@ -4,7 +4,7 @@ import MessageComponent from './index.vue'
 interface Options {
   type: string
   message: string
-  duration: number
+  duration?: number
 }
 
 export const message = (options: Options) => {

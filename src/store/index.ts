@@ -4,12 +4,14 @@ import category, { CategorysProps } from './modules/category'
 import theme, { ThemeProps } from './modules/theme'
 import app, { AppProps } from './modules/app'
 import search, { SearchProps } from './modules/search'
+import user, { UserProps } from './modules/user'
 
 export interface GlobalDataProps {
   category: CategorysProps
   theme: ThemeProps
   app: AppProps
   search: SearchProps
+  user: UserProps
 }
 
 const vuexPersister = new VuexPersister<GlobalDataProps>({
@@ -24,6 +26,7 @@ const store = createStore<GlobalDataProps>({
     theme,
     app,
     search,
+    user,
   },
   // plugins: [vuexPersister.persist],
 })

@@ -1759,6 +1759,52 @@ server.get('/pexels/themes', (req, res) => {
   })
 })
 
+server.post('/sys/register', (req, res) => {
+  res.status(200).json({
+    success: true,
+    code: 200,
+    data: {},
+    message: 'success',
+  })
+})
+
+server.post('/sys/login', (req, res) => {
+  res.status(200).json({
+    success: true,
+    code: 200,
+    data: {
+      token: ((Math.random() * Math.pow(10, 10)) | 0).toString(16),
+    },
+    message: 'success',
+  })
+})
+
+server.get('/user/profile', (req, res) => {
+  res.status(200).json({
+    success: true,
+    code: 200,
+    data: {
+      qqOpenId: '',
+      wxOpenId: '',
+      nickname: '小慕同学2879',
+      title: '',
+      company: '',
+      homePage: '',
+      introduction: '',
+      vipLevel: 0,
+      regTime: '2022-10-06T07:03:02.177Z',
+      avatar:
+        'https://m.imooc.com/static/wap/static/common/img/logo-small@2x.png',
+      outTradeNo: '',
+      payResult: false,
+      _id: '635913c24e08b04d07d3559b',
+      username: 'xiaolonghao',
+      __v: 0,
+    },
+    message: 'success',
+  })
+})
+
 server.listen(4000, () => {
   console.log('JSON Server is running at 4000')
 })
