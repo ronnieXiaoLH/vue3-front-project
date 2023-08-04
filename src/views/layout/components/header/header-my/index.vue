@@ -114,6 +114,8 @@ const clickItem = (item: MenuItem) => {
     confirm('退出登录', '您确定要退出登录吗？').then(() => {
       store.dispatch('user/logout')
     })
+  } else if (item.id === 0) {
+    router.push('/profile')
   }
 }
 </script>

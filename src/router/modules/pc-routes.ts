@@ -1,6 +1,6 @@
-import { RouteItem } from '../types'
+import { RouteRecordRaw } from 'vue-router'
 
-const routes: RouteItem[] = [
+const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
     name: 'main',
@@ -10,6 +10,15 @@ const routes: RouteItem[] = [
         path: '',
         name: 'home',
         component: () => import('@/views/main/index.vue'),
+      },
+      {
+        path: '/profile',
+        name: 'profile',
+        component: () => import('@/views/profile/index.vue'),
+        // 标记当前页面只有当用户登录后才可见
+        meta: {
+          user: true,
+        },
       },
     ],
   },
